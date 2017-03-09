@@ -53,7 +53,7 @@ namespace Tiger.Healthcheck
 
             return builder
                 .AddHealthcheck()
-                .ConfigureHealthCheck(configure);
+                .ConfigureHealthcheck(configure);
         }
 
         /// <summary>Configures subsystem healthcheckers.</summary>
@@ -67,7 +67,7 @@ namespace Tiger.Healthcheck
         /// <exception cref="ArgumentNullException"><paramref name="builder"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="configure"/> is <see langword="null"/>.</exception>
         [NotNull]
-        public static IMvcCoreBuilder ConfigureHealthCheck(
+        public static IMvcCoreBuilder ConfigureHealthcheck(
             [NotNull] this IMvcCoreBuilder builder,
             [NotNull, InstantHandle] Action<HealthcheckBuilder> configure)
         {

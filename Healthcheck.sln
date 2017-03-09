@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiger.Healthcheck", "src\Tiger.Healthcheck.csproj", "{B9FC556D-2623-4947-BC91-4F247D8A7AE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tiger.Healthcheck", "Healthcheck\Tiger.Healthcheck.csproj", "{B9FC556D-2623-4947-BC91-4F247D8A7AE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

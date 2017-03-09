@@ -1,3 +1,3 @@
-### What's new in 1.0.0 (Released 2016-07-07)
+### What's new in 1.0.1 (Released 2017-03-09)
 
 * Everything!
