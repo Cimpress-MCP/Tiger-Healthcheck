@@ -2,7 +2,69 @@
 
 ## What It Is
 
+Tiger.Healthcheck is a library for automating the creation of service healthcheck functionality and endpoints.
+
 ## Why You Want It
+
+From [RFC-Cimpress-1](https://corewiki.cimpress.net/wiki/RFC-Cimpress-1_-_API_Publication_Requirements):
+
+> ### APIs MUST:
+> * expose an instance healthcheck
+>
+> ### APIs SHOULD:
+> * Use the [healthcheck.spec](https://github.com/Cimpress-MCP/healthcheck.spec) specification for healthchecks
+
+This library will bring your ASP.NET Core service into full compliance with the healthcheck requirements of RFC-Cimpress-1 by calling a single extension method.
+
+### Subsystem Health
+
+The healthcheck specification allows for the health of subsystems to be taken into account when determining service health. This can be achieved using this library by implementing the `IHealthchecker` interface. For example, this class will check the health of an Elasticsearch instance:
+
+```
+/// <summary>Checks the health of an Elasticsearch service subsytem.</summary>
+public sealed class ElasticsearchHealthchecker
+    : IHealthchecker
+{
+    /// <inheritdoc/>
+    string IHealthchecker.Name => "elasticsearch";
+
+    readonly IElasticClient _client;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ElasticsearchHealthchecker"/> class.
+    /// </summary>
+    /// <param name="client">A client for accessing an instance of Elasticsearch.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="client"/> is <see langword="null"/>.</exception>
+    public ElasticsearchHealthchecker([NotNull] IElasticClient client)
+    {
+        _client = client ?? throw new ArgumentNullException(nameof(client));
+    }
+
+    /// <inheritdoc/>
+    async Task<Test> IHealthchecker.TestHealthAsync(
+        DateTimeOffset generationTime,
+        CancellationToken cancellationToken)
+    {
+        var elasticsearchTestTimer = Stopwatch.StartNew();
+        var pingCall = await _client.PingAsync(cancellationToken: cancellationToken)
+            .Map(r => r.ApiCall);
+        elasticsearchTestTimer.Stop();
+
+        return pingCall.Success
+            ? Pass(elasticsearchTestTimer.ElapsedMilliseconds, generationTime)
+            : Fail(
+                elasticsearchTestTimer.ElapsedMilliseconds,
+                generationTime,
+                pingCall.DebugInformation);
+    }
+}
+```
+
+This can be associated with the service healthchecker in the service's `ConfigureServices` method in the `Startup` class:
+
+```
+services.AddHealthchecker(b => b.Add<ElasticsearchHealthchecker>());
+```
 
 ## How You Develop It
 
