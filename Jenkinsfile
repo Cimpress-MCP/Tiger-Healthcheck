@@ -28,7 +28,7 @@ pipeline {
     stage('Deploy') {
       when  { branch 'master' }
       environment {
-        NUGET_API_KEY = credentials('NuGet Credentials')
+        NUGET_API_KEY = credentials('NuGet')
       }
       steps {
         sh 'echo "${NUGET_API_KEY}"'
