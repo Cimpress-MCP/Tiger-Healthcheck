@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'microsoft/dotnet:1.1-sdk'
-      args '-u root'
+      args '-u root -e NUGET_API_KEY=${NUGET_API_KEY}'
     }
   }
   
