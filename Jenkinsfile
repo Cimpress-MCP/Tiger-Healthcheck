@@ -5,6 +5,9 @@ pipeline {
       args '-u root'
     }
   }
+  options {
+    timestamps()
+  }
   
   stages {
     stage('Restore') {
@@ -20,14 +23,16 @@ pipeline {
     stage('Pack') {
       steps {
         sh 'dotnet pack -c Release -o "$(pwd)/artifacts"'
-        sh 'id'
-        sh 'env'
       }
     }
     stage('Deploy') {
       when  { branch 'master' }
+      environment {
+        NUGET_API_KEY = credentials('NuGet Credentials')
+      }
       steps {
-        sh 'dotnet nuget push artifacts/*.nupkg -k "devartifactory:{DESede}+dBrplJuEmAzbDmxseCGgg==" --no-symbols --config-file NuGet.config'
+        sh 'echo "${NUGET_API_KEY}"'
+        // sh 'dotnet nuget push artifacts/*.nupkg -k "${NUGET_API_KEY}" --no-symbols'
       }
     }
   }
