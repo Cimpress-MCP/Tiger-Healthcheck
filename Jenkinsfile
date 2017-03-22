@@ -25,7 +25,7 @@ pipeline {
     stage('Deploy') {
       when  { branch 'master' }
       steps {
-        sh 'dotnet nuget push artifacts/*.nupkg" --no-symbols --config-file NuGet.config'
+        sh 'dotnet nuget push artifacts/*.nupkg --no-symbols --config-file NuGet.config'
       }
     }
   }
