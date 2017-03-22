@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'microsoft/dotnet:1.1-sdk'
-      args '-u root -e NUGET_API_KEY=${NUGET_API_KEY}'
+      args '-u root'
     }
   }
   
@@ -27,7 +27,7 @@ pipeline {
     stage('Deploy') {
       when  { branch 'master' }
       steps {
-        sh 'dotnet nuget push artifacts/*.nupkg --no-symbols --config-file NuGet.config'
+        sh 'dotnet nuget push artifacts/*.nupkg -k "devartifactory:{DESede}+dBrplJuEmAzbDmxseCGgg==" --no-symbols --config-file NuGet.config'
       }
     }
   }
