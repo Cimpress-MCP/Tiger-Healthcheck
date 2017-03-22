@@ -5,6 +5,7 @@ namespace Tiger.Healthcheck
     {
         /// <summary>The test failed</summary>
         Failed,
+
         /// <summary>The test passed</summary>
         Passed
     }

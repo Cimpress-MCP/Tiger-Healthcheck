@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Tiger.Clock;
 using Tiger.Types;
-using static System.StringComparer;
 using static Microsoft.AspNetCore.Http.StatusCodes;
+using static System.StringComparer;
 using static Tiger.Healthcheck.State;
 
 namespace Tiger.Healthcheck
@@ -41,6 +41,7 @@ namespace Tiger.Healthcheck
         }
 
         /// <summary>Reports system health.</summary>
+        /// <param name="cancellationToken">A cancellation token that can be used to cancel the work.</param>
         /// <response code="200">The service is healthy.</response>
         /// <response code="503">The service is unhealthy.</response>
         /// <returns>Response indicating the health of the service.</returns>
@@ -63,7 +64,7 @@ namespace Tiger.Healthcheck
 
             statusTimer.Stop();
 
-            var status = new Status("Welcome bacʞ.", generationTime, statusTimer.ElapsedMilliseconds)
+            var status = new Status("Welcome bacʞ.", generationTime, statusTimer.Elapsed)
             {
                 Tests = { healths.ToDictionary(h => h.Name, h => h.Test, Ordinal) }
             };

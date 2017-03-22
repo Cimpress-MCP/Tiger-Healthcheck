@@ -18,9 +18,8 @@ namespace Tiger.Healthcheck
 
         /// <summary>Adds the specified healthchecker to the collection of healthcheckers.</summary>
         /// <typeparam name="T">The type of the healthchecker to add.</typeparam>
-        /// <returns>The current healthcheck builder.</returns>
         public void Add<T>()
-            where T: class, IHealthchecker =>
+            where T : class, IHealthchecker =>
             _healthCheckers.Add(Scoped<IHealthchecker, T>());
 
         /// <summary>Builds a new <see cref="IServiceCollection"/> using the entries added.</summary>

@@ -8,7 +8,7 @@ namespace Tiger.Healthcheck
 {
     /// <summary>Extends the functionality of <see cref="IMvcCoreBuilder"/> for healthchecking.</summary>
     [PublicAPI]
-    public static class HealthcheckMvcCoreBuilderExtensions
+    public static class MvcCoreBuilderExtensions
     {
         /// <summary>Adds healthchecking services to the specified <see cref="IMvcCoreBuilder"/>.</summary>
         /// <param name="builder">The <see cref="IMvcCoreBuilder"/> to which to add services.</param>
@@ -22,7 +22,7 @@ namespace Tiger.Healthcheck
 
             builder.AddCors(o =>
                 o.AddPolicy("Healthcheck", b =>
-                    b.WithOrigins(@"https://developer.cimpress.io")
+                    b.AllowAnyOrigin()
                      .WithMethods("GET")
                      .DisallowCredentials()
                      .SetPreflightMaxAge(TimeSpan.FromDays(1))));

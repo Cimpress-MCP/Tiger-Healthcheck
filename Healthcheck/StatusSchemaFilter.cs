@@ -2,6 +2,8 @@
 using JetBrains.Annotations;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using static System.Globalization.CultureInfo;
+using static System.TimeSpan;
 using static Tiger.Healthcheck.Test;
 
 namespace Tiger.Healthcheck
@@ -19,15 +21,15 @@ namespace Tiger.Healthcheck
             // note(cosborn) Recreate the specification's example.
             model.Example = new Status(
                 "Welcome bacʞ.",
-                DateTimeOffset.Parse("2015-06-25T14:33:33.383Z"),
-                15.8)
+                DateTimeOffset.Parse("2015-06-25T14:33:33.383Z", InvariantCulture),
+                FromMilliseconds(15.8))
             {
                 Tests =
                 {
-                    ["cassandra"] = Pass(5.6f, DateTimeOffset.Parse("2015-06-25T14:33:15.229Z")),
+                    ["cassandra"] = Pass(FromMilliseconds(5.6), DateTimeOffset.Parse("2015-06-25T14:33:15.229Z", InvariantCulture)),
                     ["redis"] = Fail(
-                        15.6f,
-                        DateTimeOffset.Parse("2015-06-25T14:33:15.286Z"),
+                        FromMilliseconds(15.6),
+                        DateTimeOffset.Parse("2015-06-25T14:33:15.286Z", InvariantCulture),
                         "Unable to connect to myredis.mydomain.com:6379")
                 }
             };

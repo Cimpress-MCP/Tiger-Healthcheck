@@ -22,5 +22,11 @@ pipeline {
         sh 'dotnet pack -c Release -o "$(pwd)/artifacts"'
       }
     }
+    stage('Deploy') {
+      when  { branch 'master' }
+      steps {
+        sh 'dotnet nuget push artifacts/*.nupkg" --no-symbols --config-file NuGet.config'
+      }
+    }
   }
 }
