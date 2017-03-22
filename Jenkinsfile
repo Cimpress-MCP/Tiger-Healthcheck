@@ -20,6 +20,8 @@ pipeline {
     stage('Pack') {
       steps {
         sh 'dotnet pack -c Release -o "$(pwd)/artifacts"'
+        sh 'id'
+        sh 'env'
       }
     }
     stage('Deploy') {
