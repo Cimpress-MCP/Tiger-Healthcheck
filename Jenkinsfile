@@ -31,8 +31,7 @@ pipeline {
         NUGET_API_KEY = credentials('NuGet')
       }
       steps {
-        sh 'echo "${NUGET_API_KEY}"'
-        // sh 'dotnet nuget push artifacts/*.nupkg -k "${NUGET_API_KEY}" --no-symbols'
+        sh 'dotnet nuget push artifacts/*.nupkg -k "${NUGET_API_KEY}"'
       }
     }
   }
