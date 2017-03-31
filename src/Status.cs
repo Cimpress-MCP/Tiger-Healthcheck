@@ -11,7 +11,7 @@ using static System.StringComparer;
 
 namespace Tiger.Healthcheck
 {
-    /// <summary>Represents the status of a livecheck operation.</summary>
+    /// <summary>Represents the status of a healthcheck operation.</summary>
     [SwaggerSchemaFilter(typeof(StatusSchemaFilter))]
     [UsedImplicitly(Access, Members)]
     sealed class Status
@@ -31,15 +31,15 @@ namespace Tiger.Healthcheck
             Duration = duration.TotalMilliseconds.ToString(InvariantCulture);
         }
 
-        /// <summary>The time at which this report was generated</summary>
+        /// <summary>Gets the time at which this report was generated.</summary>
         [JsonProperty("generated_at", Required = Always)]
         public DateTimeOffset GeneratedAt { get; }
 
-        /// <summary>The number of milliseconds it took to generate the report</summary>
+        /// <summary>Gets the number of milliseconds it took to generate the report.</summary>
         [JsonProperty("duration_millis", Required = Always)]
         public string Duration { get; }
 
-        /// <summary>Test results keyed by component</summary>
+        /// <summary>Gets test results keyed by component.</summary>
         [JsonProperty(Required = Always), NotNull]
         public IDictionary<string, Test> Tests { get; } =
             new Dictionary<string, Test>(Ordinal);

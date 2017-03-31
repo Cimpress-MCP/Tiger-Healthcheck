@@ -1,10 +1,10 @@
 pipeline {
   agent {
     docker {
-      image 'microsoft/dotnet:1.1-sdk'
-      args '-u root'
+      image 'tiger/dotnet:exp'
     }
   }
+  
   options {
     timestamps()
   }
@@ -33,6 +33,12 @@ pipeline {
       steps {
         sh 'dotnet nuget push artifacts/*.nupkg -k "${NUGET_API_KEY}"'
       }
+    }
+  }
+
+  post {
+    always {
+      deleteDir()
     }
   }
 }

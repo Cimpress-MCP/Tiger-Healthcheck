@@ -18,6 +18,12 @@ namespace Tiger.Healthcheck
             if (model == null) { throw new ArgumentNullException(nameof(model)); }
             if (context == null) { throw new ArgumentNullException(nameof(context)); }
 
+            model.Description = "Represents the status of a healthcheck operation.";
+
+            model.Properties["generated_at"].Description = "The time at which this report was generated.";
+            model.Properties["duration_millis"].Description = "The number of milliseconds it took to generate the report.";
+            model.Properties["tests"].Description = "Test results keyed by component.";
+
             // note(cosborn) Recreate the specification's example.
             model.Example = new Status(
                 "Welcome bacʞ.",

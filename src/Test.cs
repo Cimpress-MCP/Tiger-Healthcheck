@@ -1,12 +1,14 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using static JetBrains.Annotations.ImplicitUseTargetFlags;
 using static Newtonsoft.Json.Required;
 
 namespace Tiger.Healthcheck
 {
     /// <summary>Represents a status test.</summary>
+    [SwaggerSchemaFilter(typeof(TestSchemaFilter))]
     [UsedImplicitly(Members)]
     public abstract class Test
     {
@@ -25,16 +27,16 @@ namespace Tiger.Healthcheck
             TestedAt = testedAt;
         }
 
-        /// <summary>Number of milliseconds taken to run this test</summary>
+        /// <summary>Gets the number of milliseconds taken to run this test.</summary>
         [JsonProperty("duration_millis", Required = Always)]
         public double Duration { get; }
 
-        /// <summary>The final state of this test</summary>
+        /// <summary>Gets the final state of this test.</summary>
         [JsonProperty(Required = Always)]
         public abstract State Result { get; }
 
-        /// <summary>The time at which this test was executed</summary>
-        [JsonProperty(Required = Always)]
+        /// <summary>Gets the time at which this test was executed.</summary>
+        [JsonProperty("tested_at", Required = Always)]
         public DateTimeOffset TestedAt { get; }
 
         /// <summary>Creates a passed test.</summary>
@@ -97,7 +99,7 @@ namespace Tiger.Healthcheck
             /// <inheritdoc/>
             public override State Result => State.Failed;
 
-            /// <summary>A description of any error conditions</summary>
+            /// <summary>Gets a description of any error conditions.</summary>
             [JsonProperty(Required = Always)]
             public string Error { get; }
         }
