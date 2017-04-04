@@ -5,7 +5,7 @@
     <Copyright>©Cimpress 2017</Copyright>
     <AssemblyTitle>Tiger Healthcheck</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>2.0.2</VersionPrefix>
+    <VersionPrefix>2.0.3</VersionPrefix>
     <Authors>cosborn@cimpress.com</Authors>
     <TargetFramework>netstandard1.6</TargetFramework>
     <DefineConstants>$(DefineConstants);CODE_ANALYSIS</DefineConstants>
@@ -17,8 +17,7 @@
     <AssemblyName>Tiger.Healthcheck</AssemblyName>
     <PackageId>Tiger.Healthcheck</PackageId>
     <PackageTags>health;check;healthcheck;endpoint;mvc</PackageTags>
-    <PackageReleaseNotes>⁃ The CORS rules for the `/healthcheck` endpoint have been improved.
-⁃ More methods accept a `TimeSpan`, which will be converted into the units required for serialization automatically.</PackageReleaseNotes>
+    <PackageReleaseNotes>⁃ Documentation generation has been significantly improved.</PackageReleaseNotes>
     <PackageProjectUrl>https://mcpstash.cimpress.net/projects/TIGER</PackageProjectUrl>
     <PackageIconUrl>https://mcpstash.cimpress.net/projects/TIGER/repos/healthcheck/browse/tiger_logo.png?raw</PackageIconUrl>
     <RepositoryType>git</RepositoryType>

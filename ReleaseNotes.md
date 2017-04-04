@@ -1,6 +1,10 @@
+### What's new in 2.0.3 (Released 2017-04-04)
+
+* Documentation generation has been significantly improved.
+
 ### What's new in 2.0.1 (Released 2017-03-31)
 
-* Documentation has been slightly improved.
+* Documentation generation has been slightly improved.
 
 ### What's new in 2.0.0 (Released 2017-03-20)
 

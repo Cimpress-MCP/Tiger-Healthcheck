@@ -29,6 +29,7 @@ namespace Tiger.Healthcheck
             builder.Services.TryAddScoped<IClock, StandardClock>();
             builder.Services.AddSwaggerGen(o => o.DocumentFilter<HealthcheckDescriptionDocumentFilter>());
 
+
             return builder;
         }
 

@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using Tiger.Clock;
 using Tiger.Types;
 using static Microsoft.AspNetCore.Http.StatusCodes;
@@ -45,10 +46,11 @@ namespace Tiger.Healthcheck
         /// <response code="200">The service is healthy.</response>
         /// <response code="503">The service is unhealthy.</response>
         /// <returns>Response indicating the health of the service.</returns>
-        /// <remarks>Performs healthcheck of the service.</remarks>
+        /// <remarks>Performs healthcheck of the service, possibly including subsystems.</remarks>
         [HttpGet]
         [ProducesResponseType(typeof(Status), Status200OK)]
         [ProducesResponseType(typeof(Status), Status503ServiceUnavailable)]
+        [SwaggerOperationFilter(typeof(HealthcheckGetOperationFilter))]
         [NotNull, ItemNotNull]
         public async Task<IActionResult> Get(CancellationToken cancellationToken)
         {
