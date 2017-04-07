@@ -49,7 +49,7 @@ namespace Tiger.Healthcheck
         /// <summary>Gets the final state of this test.</summary>
         [JsonProperty(Required = Always)]
         [Required]
-        public State Result => Error != null
+        public State Result => Error == null
             ? Passed
             : Failed;
 

@@ -27,8 +27,7 @@ namespace Tiger.Healthcheck
                      .DisallowCredentials()
                      .SetPreflightMaxAge(TimeSpan.FromDays(1))));
             builder.Services.TryAddScoped<IClock, StandardClock>();
-            builder.Services.AddSwaggerGen(o => o.DocumentFilter<HealthcheckDescriptionDocumentFilter>());
-
+            builder.Services.AddSwaggerGen(o => o.DocumentFilter<HealthcheckController.DocumentFilter>());
 
             return builder;
         }

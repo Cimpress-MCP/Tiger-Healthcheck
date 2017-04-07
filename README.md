@@ -20,7 +20,7 @@ This library will bring your ASP.NET Core service into full compliance with the 
 
 The healthcheck specification allows for the health of subsystems to be taken into account when determining service health. This can be achieved using this library by implementing the `IHealthchecker` interface. For example, this class will check the health of an Elasticsearch instance:
 
-```
+```csharp
 /// <summary>Checks the health of an Elasticsearch service subsytem.</summary>
 public sealed class ElasticsearchHealthchecker
     : IHealthchecker
@@ -62,7 +62,7 @@ public sealed class ElasticsearchHealthchecker
 
 This can be associated with the service healthchecker in the service's `ConfigureServices` method in the `Startup` class:
 
-```
+```csharp
 services.AddHealthchecker(b => b.Add<ElasticsearchHealthchecker>());
 ```
 

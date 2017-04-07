@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Tiger.Clock;
 using Tiger.Types;
@@ -20,7 +21,7 @@ namespace Tiger.Healthcheck
     /// <summary>Manages the reporting of system health.</summary>
     [PublicAPI]
     [Route("[controller]"), EnableCors("Healthcheck"), AllowAnonymous]
-    public class HealthcheckController
+    public sealed partial class HealthcheckController
         : ControllerBase
     {
         readonly IClock _clock;
@@ -50,7 +51,7 @@ namespace Tiger.Healthcheck
         [HttpGet]
         [ProducesResponseType(typeof(Status), Status200OK)]
         [ProducesResponseType(typeof(Status), Status503ServiceUnavailable)]
-        [SwaggerOperationFilter(typeof(HealthcheckGetOperationFilter))]
+        [SwaggerOperationFilter(typeof(GetOperationFilter))]
         [NotNull, ItemNotNull]
         public async Task<IActionResult> Get(CancellationToken cancellationToken)
         {

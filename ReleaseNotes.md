@@ -1,3 +1,7 @@
+### What's new in 2.0.3 (Released 2017-04-07)
+
+* Error reporting has been improved.
+
 ### What's new in 2.0.3 (Released 2017-04-04)
 
 * Documentation generation has been significantly improved.
