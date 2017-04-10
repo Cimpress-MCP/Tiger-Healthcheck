@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Tiger.Clock;
-using Tiger.Types;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 using static System.StringComparer;
 using static Tiger.Healthcheck.State;
@@ -59,11 +58,12 @@ namespace Tiger.Healthcheck
             var statusTimer = Stopwatch.StartNew();
 
             // note(cosborn) Transform into the shape that the healthcheck RFC expects.
-            var healths = await _healthcheckers.Select(async h => new
+            var healthTasks = _healthcheckers.Select(async h => new
             {
                 h.Name,
                 Test = await h.TestHealthAsync(generationTime, cancellationToken)
-            }).Pipe(Task.WhenAll);
+            });
+            var healths = await Task.WhenAll(healthTasks);
 
             statusTimer.Stop();
 

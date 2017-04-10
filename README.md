@@ -9,10 +9,10 @@ Tiger.Healthcheck is a library for automating the creation of service healthchec
 From [RFC-Cimpress-1](https://corewiki.cimpress.net/wiki/RFC-Cimpress-1_-_API_Publication_Requirements):
 
 > ### APIs MUST:
-> * expose an instance healthcheck
+> - expose an instance healthcheck
 >
 > ### APIs SHOULD:
-> * Use the [healthcheck.spec](https://github.com/Cimpress-MCP/healthcheck.spec) specification for healthchecks
+> - Use the [healthcheck.spec](https://github.com/Cimpress-MCP/healthcheck.spec) specification for healthchecks
 
 This library will bring your ASP.NET Core service into full compliance with the healthcheck requirements of RFC-Cimpress-1 by calling a single extension method.
 
@@ -68,7 +68,17 @@ services.AddHealthchecker(b => b.Add<ElasticsearchHealthchecker>());
 
 ## How You Develop It
 
-This project is using the standard [`dotnet`](https://dot.net) build tool.
+This project is using the standard [`dotnet`](https://dot.net) build tool. A brief primer:
+
+- Restore NuGet dependencies: `dotnet restore`
+- Build the entire solution: `dotnet build`
+- Run all unit tests: `dotnet test`
+- Pack for publishing: `dotnet pack -o "$(pwd)/artifacts"`
+
+The parameter `--configuration` (shortname `-c`) can be supplied to the `build`, `test`, and `pack` steps with the following meaningful values:
+
+- “Debug” (the default)
+- “Release”
 
 This repository is attempting to use the [GitFlow](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/) branching methodology. Results may be mixed, please be aware.
 
