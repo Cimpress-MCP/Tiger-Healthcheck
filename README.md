@@ -21,7 +21,7 @@ This library will bring your ASP.NET Core service into full compliance with the 
 The healthcheck specification allows for the health of subsystems to be taken into account when determining service health. This can be achieved using this library by implementing the `IHealthchecker` interface. For example, this class will check the health of an Elasticsearch instance:
 
 ```csharp
-/// <summary>Checks the health of an Elasticsearch service subsytem.</summary>
+/// <summary>Checks the health of an Elasticsearch service subsystem.</summary>
 public sealed class ElasticsearchHealthchecker
     : IHealthchecker
 {
@@ -30,9 +30,7 @@ public sealed class ElasticsearchHealthchecker
 
     readonly IElasticClient _client;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ElasticsearchHealthchecker"/> class.
-    /// </summary>
+    /// <summary>Initializes a new instance of the <see cref="ElasticsearchHealthchecker"/> class.</summary>
     /// <param name="client">A client for accessing an instance of Elasticsearch.</param>
     /// <exception cref="ArgumentNullException"><paramref name="client"/> is <see langword="null"/>.</exception>
     public ElasticsearchHealthchecker([NotNull] IElasticClient client)
@@ -45,17 +43,13 @@ public sealed class ElasticsearchHealthchecker
         DateTimeOffset generationTime,
         CancellationToken cancellationToken)
     {
-        var elasticsearchTestTimer = Stopwatch.StartNew();
-        var pingCall = await _client.PingAsync(cancellationToken: cancellationToken)
-            .Map(r => r.ApiCall);
-        elasticsearchTestTimer.Stop();
+        var timer = Stopwatch.StartNew();
+        var pingCall = await _client.PingAsync(cancellationToken: cancellationToken).Map(r => r.ApiCall);
+        timer.Stop();
 
         return pingCall.Success
-            ? Pass(elasticsearchTestTimer.ElapsedMilliseconds, generationTime)
-            : Fail(
-                elasticsearchTestTimer.ElapsedMilliseconds,
-                generationTime,
-                pingCall.DebugInformation);
+            ? Pass(timer.Elapsed, generationTime)
+            : Fail(timer.Elapsed, generationTime, pingCall.DebugInformation);
     }
 }
 ```
