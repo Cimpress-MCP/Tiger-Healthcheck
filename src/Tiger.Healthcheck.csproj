@@ -17,7 +17,7 @@
     <AssemblyName>Tiger.Healthcheck</AssemblyName>
     <PackageId>Tiger.Healthcheck</PackageId>
     <PackageTags>health;check;healthcheck;endpoint;mvc</PackageTags>
-    <PackageReleaseNotes>⁃ Error reporting has been improved.</PackageReleaseNotes>
+    <PackageReleaseNotes>⁃ A dependency has been removed.</PackageReleaseNotes>
     <PackageProjectUrl>https://mcpstash.cimpress.net/projects/TIGER</PackageProjectUrl>
     <PackageIconUrl>https://mcpstash.cimpress.net/projects/TIGER/repos/healthcheck/browse/tiger_logo.png?raw</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
