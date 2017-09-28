@@ -1,0 +1,33 @@
+-
+  branches:
+    only:
+      - master
+  version: '{build}'
+  image: Visual Studio 2017
+  environment:
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  configuration: Release
+  before_build:
+    - ps: dotnet restore
+  build:
+    publish_nuget: true
+    verbosity: minimal
+  deploy:
+    provider: NuGet
+    api_key:
+      secure: lDZOfkSGSv+vsyfNqk8CEfIeePGrEr6eNpeu3qDo8DlUFlJnubB+0KuR01t34hVl
+  dotnet_csproj:
+    patch: false
+-
+  version: '{build}'
+  image: Visual Studio 2017
+  environment:
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  configuration: Release
+  before_build:
+    - ps: dotnet restore
+  build:
+    publish_nuget: true
+    verbosity: minimal
+  dotnet_csproj:
+    patch: false

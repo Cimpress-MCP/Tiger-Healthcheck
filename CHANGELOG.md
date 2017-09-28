@@ -1,3 +1,7 @@
+### What's new in 2.1.0 (Released 2017-09-28)
+
+* Serialzation of keys has been made to match the specification irrespective of the application's serialization settings.
+
 ### What's new in 2.0.5 (Released 2017-04-12)
 
 * A dependency has been removed.

@@ -1,18 +1,34 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿// <copyright file="Test.cs" company="Cimpress, Inc.">
+//   Copyright 2017 Cimpress, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+// </copyright>
+
+using System;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using static JetBrains.Annotations.ImplicitUseTargetFlags;
 using static Newtonsoft.Json.DefaultValueHandling;
-using static Newtonsoft.Json.Required;
 using static Tiger.Healthcheck.State;
 
 namespace Tiger.Healthcheck
 {
     /// <summary>Represents a status test.</summary>
     [SwaggerSchemaFilter(typeof(TestSchemaFilter))]
-    [UsedImplicitly(Members)]
+    [JsonObject(
+        NamingStrategyType = typeof(SnakeCaseNamingStrategy),
+        NamingStrategyParameters = new object[] { false, true, false })]
     public sealed class Test
     {
         /// <summary>Initializes a new instance of the <see cref="Test"/> class.</summary>
@@ -35,6 +51,7 @@ namespace Tiger.Healthcheck
         /// <param name="testedAt">The date and time at which this test was executed.</param>
         /// <param name="error">A description of the test failure.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="duration"/> is negative.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="error"/> is <see langword="null"/>.</exception>
         internal Test(TimeSpan duration, DateTimeOffset testedAt, [NotNull] string error)
             : this(duration, testedAt)
         {
@@ -42,20 +59,15 @@ namespace Tiger.Healthcheck
         }
 
         /// <summary>Gets the number of milliseconds taken to run this test.</summary>
-        [JsonProperty("duration_millis", Required = Always)]
-        [Required]
+        [JsonProperty("DurationMillis")]
         public double Duration { get; }
 
         /// <summary>Gets the final state of this test.</summary>
-        [JsonProperty(Required = Always)]
-        [Required]
         public State Result => Error == null
             ? Passed
             : Failed;
 
         /// <summary>Gets the time at which this test was executed.</summary>
-        [JsonProperty("tested_at", Required = Always)]
-        [Required]
         public DateTimeOffset TestedAt { get; }
 
         /// <summary>Gets a description of any error conditions.</summary>
