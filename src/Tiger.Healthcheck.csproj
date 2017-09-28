@@ -5,7 +5,7 @@
     <Copyright>©Cimpress 2017</Copyright>
     <AssemblyTitle>Tiger Healthcheck</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>2.0.6</VersionPrefix>
+    <VersionPrefix>2.1.0</VersionPrefix>
     <Authors>cosborn@cimpress.com</Authors>
     <TargetFramework>netstandard1.6</TargetFramework>
     <DefineConstants>$(DefineConstants);CODE_ANALYSIS</DefineConstants>
@@ -17,15 +17,18 @@
     <AssemblyName>Tiger.Healthcheck</AssemblyName>
     <PackageId>Tiger.Healthcheck</PackageId>
     <PackageTags>health;check;healthcheck;endpoint;mvc</PackageTags>
-    <PackageReleaseNotes>⁃ A dependency has been removed.</PackageReleaseNotes>
-    <PackageProjectUrl>https://mcpstash.cimpress.net/projects/TIGER</PackageProjectUrl>
-    <PackageIconUrl>https://mcpstash.cimpress.net/projects/TIGER/repos/healthcheck/browse/tiger_logo.png?raw</PackageIconUrl>
+    <PackageReleaseNotes>⁃ Serialzation of keys has been made to match the specification irrespective of the application's serialization settings.
+</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/Cimpress-MCP/Tiger-Healthcheck</PackageProjectUrl>
+    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>  
+    <PackageIconUrl>https://raw.githubusercontent.com/Cimpress-MCP/Tiger-Healthcheck/master/tiger_logo.png</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://mcpstash.cimpress.net/projects/TIGER/repos/healthcheck</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Cimpress-MCP/Tiger-Healthcheck.git</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>
     <Features>IOperation</Features>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,19 +37,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Cors" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.0" />
+    <Compile Update="HealthcheckController.DocumentFilter.cs">
+      <DependentUpon>HealthcheckController.cs</DependentUpon>
+    </Compile>
+    <Compile Update="HealthcheckController.OperationFilters.cs">
+      <DependentUpon>HealthcheckController.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Cors" Version="1.1.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="1.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.0.0" />
     <PackageReference Include="Tiger.Clock" Version="1.0.0" />
 
-    <!--<PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta001">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="System.Runtime.Analyzers" Version="1.2.0-beta2">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>-->
+    <PackageReference Include="Microsoft.NetCore.Analyzers" Version="2.3.0-beta1" PrivateAssets="All" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta004" PrivateAssets="All" />
+    <PackageReference Include="Text.Analyzers" Version="2.3.0-beta1" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

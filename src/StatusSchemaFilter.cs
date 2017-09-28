@@ -1,9 +1,24 @@
-﻿using System;
+﻿// <copyright file="StatusSchemaFilter.cs" company="Cimpress, Inc.">
+//   Copyright 2017 Cimpress, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+// </copyright>
+
+using System;
 using JetBrains.Annotations;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using static System.Globalization.CultureInfo;
-using static System.TimeSpan;
 using static Tiger.Healthcheck.Test;
 
 namespace Tiger.Healthcheck
@@ -28,13 +43,15 @@ namespace Tiger.Healthcheck
             model.Example = new Status(
                 "Welcome bacʞ.",
                 DateTimeOffset.Parse("2015-06-25T14:33:33.383Z", InvariantCulture),
-                FromMilliseconds(15.8))
+                TimeSpan.FromMilliseconds(15.8))
             {
                 Tests =
                 {
-                    ["cassandra"] = Pass(FromMilliseconds(5.6), DateTimeOffset.Parse("2015-06-25T14:33:15.229Z", InvariantCulture)),
+                    ["cassandra"] = Pass(
+                        TimeSpan.FromMilliseconds(5.6),
+                        DateTimeOffset.Parse("2015-06-25T14:33:15.229Z", InvariantCulture)),
                     ["redis"] = Fail(
-                        FromMilliseconds(15.6),
+                        TimeSpan.FromMilliseconds(15.6),
                         DateTimeOffset.Parse("2015-06-25T14:33:15.286Z", InvariantCulture),
                         "Unable to connect to myredis.mydomain.com:6379")
                 }
