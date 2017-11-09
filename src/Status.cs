@@ -16,11 +16,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using static System.Globalization.CultureInfo;
 using static System.StringComparer;
 
 namespace Tiger.Healthcheck
@@ -44,7 +44,7 @@ namespace Tiger.Healthcheck
         {
             Extensions[nameof(message)] = message ?? throw new ArgumentNullException(nameof(message));
             GeneratedAt = generatedAt;
-            Duration = duration.TotalMilliseconds.ToString(InvariantCulture);
+            Duration = duration.TotalMilliseconds.ToString(CultureInfo.CurrentCulture);
         }
 
         /// <summary>Gets the time at which this report was generated.</summary>
