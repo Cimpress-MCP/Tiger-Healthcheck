@@ -1,3 +1,7 @@
+### What's new in 3.0.0 (Released 2017-11-09)
+
+* The project is now compatible with ASP.NET Core 2.0.
+
 ### What's new in 2.1.0 (Released 2017-09-28)
 
 * Serialzation of keys has been made to match the specification irrespective of the application's serialization settings.
