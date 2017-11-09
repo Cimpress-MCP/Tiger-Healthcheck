@@ -5,9 +5,9 @@
     <Copyright>©Cimpress 2017</Copyright>
     <AssemblyTitle>Tiger Healthcheck</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>2.1.0</VersionPrefix>
+    <VersionPrefix>3.0.0</VersionPrefix>
     <Authors>cosborn@cimpress.com</Authors>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <DefineConstants>$(DefineConstants);CODE_ANALYSIS</DefineConstants>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
@@ -17,7 +17,7 @@
     <AssemblyName>Tiger.Healthcheck</AssemblyName>
     <PackageId>Tiger.Healthcheck</PackageId>
     <PackageTags>health;check;healthcheck;endpoint;mvc</PackageTags>
-    <PackageReleaseNotes>⁃ Serialzation of keys has been made to match the specification irrespective of the application's serialization settings.
+    <PackageReleaseNotes>⁃ The project is now compatible with ASP.NET Core 2.0.
 </PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/Cimpress-MCP/Tiger-Healthcheck</PackageProjectUrl>
     <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>  
@@ -47,8 +47,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Cors" Version="1.1.4" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.0.0" />
     <PackageReference Include="Tiger.Clock" Version="1.0.0" />
 
