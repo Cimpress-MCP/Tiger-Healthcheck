@@ -57,7 +57,7 @@ public sealed class ElasticsearchHealthchecker
 This can be associated with the service healthchecker in the service's `ConfigureServices` method in the `Startup` class:
 
 ```csharp
-services.AddHealthchecker(b => b.Add<ElasticsearchHealthchecker>());
+services.AddHealthcheck(b => b.Add<ElasticsearchHealthchecker>());
 ```
 
 ## How You Develop It

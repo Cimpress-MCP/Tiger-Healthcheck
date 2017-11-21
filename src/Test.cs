@@ -28,7 +28,7 @@ namespace Tiger.Healthcheck
     [SwaggerSchemaFilter(typeof(TestSchemaFilter))]
     [JsonObject(
         NamingStrategyType = typeof(SnakeCaseNamingStrategy),
-        NamingStrategyParameters = new object[] { false, true, false })]
+        NamingStrategyParameters = new object[] { false, true, true })]
     public sealed class Test
     {
         /// <summary>Initializes a new instance of the <see cref="Test"/> class.</summary>
