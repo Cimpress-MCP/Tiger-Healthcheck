@@ -28,10 +28,9 @@ namespace Tiger.Healthcheck
             : IOperationFilter
         {
             /// <inheritdoc/>
-            void IOperationFilter.Apply([NotNull] Operation operation, [NotNull] OperationFilterContext context)
+            void IOperationFilter.Apply([NotNull] Operation operation, OperationFilterContext context)
             {
                 if (operation == null) { throw new ArgumentNullException(nameof(operation)); }
-                if (context == null) { throw new ArgumentNullException(nameof(context)); }
 
                 operation.Summary = "Reports system health.";
                 operation.Description = "Performs healthcheck of the service, possibly including subsystems.";

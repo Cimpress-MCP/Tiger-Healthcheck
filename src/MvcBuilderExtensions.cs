@@ -1,4 +1,4 @@
-// <copyright file="MvcCoreBuilderExtensions.cs" company="Cimpress, Inc.">
+// <copyright file="MvcBuilderExtensions.cs" company="Cimpress, Inc.">
 //   Copyright 2017 Cimpress, Inc.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,21 +22,20 @@ using Tiger.Clock;
 
 namespace Tiger.Healthcheck
 {
-    /// <summary>Extends the functionality of <see cref="IMvcCoreBuilder"/> for healthchecking.</summary>
+    /// <summary>Extends the functionality of <see cref="IMvcBuilder"/> for healthchecking.</summary>
     [PublicAPI]
-    public static class MvcCoreBuilderExtensions
+    public static class MvcBuilderExtensions
     {
-        /// <summary>Adds healthchecking services to the specified <see cref="IMvcCoreBuilder"/>.</summary>
-        /// <param name="builder">The <see cref="IMvcCoreBuilder"/> to which to add services.</param>
+        /// <summary>Adds healthchecking services to the specified <see cref="IMvcBuilder"/>.</summary>
+        /// <param name="builder">The <see cref="IMvcBuilder"/> to which to add services.</param>
         /// <returns>The modified application builder.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="builder"/> is <see langword="null"/>.</exception>
         [NotNull]
-        public static IMvcCoreBuilder AddHealthcheck(
-            [NotNull] this IMvcCoreBuilder builder)
+        public static IMvcBuilder AddHealthcheck([NotNull] this IMvcBuilder builder)
         {
             if (builder == null) { throw new ArgumentNullException(nameof(builder)); }
 
-            builder.AddCors(o =>
+            builder.Services.AddCors(o =>
                 o.AddPolicy("Healthcheck", b =>
                     b.AllowAnyOrigin()
                      .WithMethods("GET")
@@ -49,10 +48,10 @@ namespace Tiger.Healthcheck
         }
 
         /// <summary>
-        /// Adds healthchecking services to the specified <see cref="IMvcCoreBuilder"/>
+        /// Adds healthchecking services to the specified <see cref="IMvcBuilder"/>
         /// and configures subsystem healthcheckers.
         /// </summary>
-        /// <param name="builder">The <see cref="IMvcCoreBuilder"/> to which to add services.</param>
+        /// <param name="builder">The <see cref="IMvcBuilder"/> to which to add services.</param>
         /// <param name="configure">
         /// An <see cref="Action{T}"/> to configure the provided <see cref="HealthcheckBuilder"/>.
         /// </param>
@@ -60,8 +59,8 @@ namespace Tiger.Healthcheck
         /// <exception cref="ArgumentNullException"><paramref name="builder"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="configure"/> is <see langword="null"/>.</exception>
         [NotNull]
-        public static IMvcCoreBuilder AddHealthcheck(
-            [NotNull] this IMvcCoreBuilder builder,
+        public static IMvcBuilder AddHealthcheck(
+            [NotNull] this IMvcBuilder builder,
             [NotNull, InstantHandle] Action<HealthcheckBuilder> configure)
         {
             if (builder == null) { throw new ArgumentNullException(nameof(builder)); }
@@ -73,9 +72,7 @@ namespace Tiger.Healthcheck
         }
 
         /// <summary>Configures subsystem healthcheckers.</summary>
-        /// <param name="builder">
-        /// The <see cref="IMvcCoreBuilder"/> on which to configure services.
-        /// </param>
+        /// <param name="builder">The <see cref="IMvcBuilder"/> on which to configure services.</param>
         /// <param name="configure">
         /// An <see cref="Action{T}"/> to configure the provided <see cref="HealthcheckBuilder"/>.
         /// </param>
@@ -83,8 +80,8 @@ namespace Tiger.Healthcheck
         /// <exception cref="ArgumentNullException"><paramref name="builder"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="configure"/> is <see langword="null"/>.</exception>
         [NotNull]
-        public static IMvcCoreBuilder ConfigureHealthcheck(
-            [NotNull] this IMvcCoreBuilder builder,
+        public static IMvcBuilder ConfigureHealthcheck(
+            [NotNull] this IMvcBuilder builder,
             [NotNull, InstantHandle] Action<HealthcheckBuilder> configure)
         {
             if (builder == null) { throw new ArgumentNullException(nameof(builder)); }

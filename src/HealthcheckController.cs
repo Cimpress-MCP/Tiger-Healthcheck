@@ -41,9 +41,7 @@ namespace Tiger.Healthcheck
         readonly IClock _clock;
         readonly IEnumerable<IHealthchecker> _healthcheckers;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HealthcheckController"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="HealthcheckController"/> class.</summary>
         /// <param name="clock">A source of system time.</param>
         /// <param name="healthcheckers">A collection of objects capable of determining subsystem health.</param>
         /// <exception cref="ArgumentNullException"><paramref name="clock"/> is <see langword="null"/>.</exception>
@@ -73,18 +71,15 @@ namespace Tiger.Healthcheck
             var statusTimer = Stopwatch.StartNew();
 
             // note(cosborn) Transform into the shape that the healthcheck RFC expects.
-            var healthTasks = _healthcheckers.Select(async h => new
-            {
-                h.Name,
-                Test = await h.TestHealthAsync(generationTime, cancellationToken)
-            });
-            var healths = await Task.WhenAll(healthTasks);
+            var healthTasks = _healthcheckers.Select(async h =>
+                (name: h.Name, test: await h.TestHealthAsync(generationTime, cancellationToken).ConfigureAwait(false)));
+            var healths = await Task.WhenAll(healthTasks).ConfigureAwait(false);
 
             statusTimer.Stop();
 
             var status = new Status("Welcome bacʞ.", generationTime, statusTimer.Elapsed)
             {
-                Tests = { healths.ToDictionary(h => h.Name, h => h.Test, Ordinal) }
+                Tests = { healths.ToDictionary(h => h.name, h => h.test, Ordinal) }
             };
 
             return status.Tests.Values.Any(t => t.Result == Failed)

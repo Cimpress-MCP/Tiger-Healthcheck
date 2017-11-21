@@ -25,7 +25,7 @@ namespace Tiger.Healthcheck
     [PublicAPI]
     public sealed class HealthcheckBuilder
     {
-        readonly ServiceCollection _healthCheckers = new ServiceCollection();
+        readonly IServiceCollection _healthCheckers = new ServiceCollection();
 
         /// <summary>Initializes a new instance of the <see cref="HealthcheckBuilder"/> class.</summary>
         internal HealthcheckBuilder()
@@ -36,7 +36,7 @@ namespace Tiger.Healthcheck
         /// <typeparam name="T">The type of the healthchecker to add.</typeparam>
         public void Add<T>()
             where T : class, IHealthchecker =>
-            _healthCheckers.Add(Scoped<IHealthchecker, T>());
+            _healthCheckers.TryAddEnumerable(Scoped<IHealthchecker, T>());
 
         /// <summary>Builds a new <see cref="IServiceCollection"/> using the entries added.</summary>
         /// <returns>The constructed <see cref="IServiceCollection"/>.</returns>
