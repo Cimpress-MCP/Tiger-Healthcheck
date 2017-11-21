@@ -1,3 +1,7 @@
+### What's new in 4.0.0 (Released 2017-11-21)
+
+* The project is now designed for ASP.NET Core 2.0.
+
 ### What's new in 3.0.0 (Released 2017-11-09)
 
 * The project is now compatible with ASP.NET Core 2.0.
