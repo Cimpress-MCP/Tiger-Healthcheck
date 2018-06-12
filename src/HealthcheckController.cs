@@ -50,7 +50,7 @@ namespace Tiger.Healthcheck
         /// <exception cref="ArgumentNullException"><paramref name="healthcheckers"/> is <see langword="null"/>.</exception>
         public HealthcheckController(
             [NotNull] IClock clock,
-            [NotNull] IEnumerable<IHealthchecker> healthcheckers)
+            [NotNull, ItemNotNull] IEnumerable<IHealthchecker> healthcheckers)
         {
             _clock = clock ?? throw new ArgumentNullException(nameof(clock));
             _healthcheckers = healthcheckers ?? throw new ArgumentNullException(nameof(healthcheckers));
@@ -67,17 +67,13 @@ namespace Tiger.Healthcheck
         [ProducesResponseType(typeof(Status), Status503ServiceUnavailable)]
         [SwaggerOperationFilter(typeof(GetOperationFilter))]
         [NotNull, ItemNotNull]
-        public async Task<IActionResult> Get(CancellationToken cancellationToken)
+        public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
         {
             var generationTime = _clock.Now;
             var statusTimer = Stopwatch.StartNew();
 
-            // note(cosborn) Transform into the shape that the healthcheck RFC expects.
-            var healthTasks = _healthcheckers.Select(async h => new
-            {
-                h.Name,
-                Test = await h.TestHealthAsync(generationTime, cancellationToken)
-            });
+            var healthTasks = _healthcheckers.Select(
+                async h => (h.Name, Test: await h.TestHealthAsync(generationTime, cancellationToken)));
             var healths = await Task.WhenAll(healthTasks);
 
             statusTimer.Stop();

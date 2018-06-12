@@ -1,3 +1,7 @@
+### What's new in 4.0.0 (Released 2018-06-12)
+
+* Registration of healthcheckers has been simplified.
+
 ### What's new in 3.0.0 (Released 2017-11-09)
 
 * The project is now compatible with ASP.NET Core 2.0.
