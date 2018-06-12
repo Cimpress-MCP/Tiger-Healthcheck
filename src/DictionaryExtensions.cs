@@ -35,8 +35,8 @@ namespace Tiger.Healthcheck
             [NotNull] this IDictionary<TKey, TValue> value,
             [NotNull] IEnumerable<KeyValuePair<TKey, TValue>> range)
         {
-            if (value == null) { throw new ArgumentNullException(nameof(value)); }
-            if (range == null) { throw new ArgumentNullException(nameof(range)); }
+            if (value is null) { throw new ArgumentNullException(nameof(value)); }
+            if (range is null) { throw new ArgumentNullException(nameof(range)); }
 
             foreach (var kvp in range)
             {

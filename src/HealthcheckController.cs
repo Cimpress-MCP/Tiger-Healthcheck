@@ -48,7 +48,7 @@ namespace Tiger.Healthcheck
         /// <exception cref="ArgumentNullException"><paramref name="healthcheckers"/> is <see langword="null"/>.</exception>
         public HealthcheckController(
             [NotNull] IClock clock,
-            [NotNull] IEnumerable<IHealthchecker> healthcheckers)
+            [NotNull, ItemNotNull] IEnumerable<IHealthchecker> healthcheckers)
         {
             _clock = clock ?? throw new ArgumentNullException(nameof(clock));
             _healthcheckers = healthcheckers ?? throw new ArgumentNullException(nameof(healthcheckers));
@@ -65,21 +65,20 @@ namespace Tiger.Healthcheck
         [ProducesResponseType(typeof(Status), Status503ServiceUnavailable)]
         [SwaggerOperationFilter(typeof(GetOperationFilter))]
         [NotNull, ItemNotNull]
-        public async Task<IActionResult> Get(CancellationToken cancellationToken)
+        public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
         {
             var generationTime = _clock.Now;
             var statusTimer = Stopwatch.StartNew();
 
-            // note(cosborn) Transform into the shape that the healthcheck RFC expects.
-            var healthTasks = _healthcheckers.Select(async h =>
-                (name: h.Name, test: await h.TestHealthAsync(generationTime, cancellationToken).ConfigureAwait(false)));
-            var healths = await Task.WhenAll(healthTasks).ConfigureAwait(false);
+            var healthTasks = _healthcheckers.Select(
+                async h => (h.Name, Test: await h.TestHealthAsync(generationTime, cancellationToken)));
+            var healths = await Task.WhenAll(healthTasks);
 
             statusTimer.Stop();
 
             var status = new Status("Welcome bacʞ.", generationTime, statusTimer.Elapsed)
             {
-                Tests = { healths.ToDictionary(h => h.name, h => h.test, Ordinal) }
+                Tests = { healths.ToDictionary(h => h.Name, h => h.Test, Ordinal) }
             };
 
             return status.Tests.Values.Any(t => t.Result == Failed)
