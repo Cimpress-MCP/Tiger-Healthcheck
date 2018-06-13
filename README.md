@@ -26,7 +26,7 @@ public sealed class ElasticsearchHealthchecker
     : IHealthchecker
 {
     /// <inheritdoc/>
-    string IHealthchecker.Name => "elasticsearch";
+    string IHealthchecker.Name => "Elasticsearch";
 
     readonly IElasticClient _client;
 
@@ -57,7 +57,7 @@ public sealed class ElasticsearchHealthchecker
 This can be associated with the service healthchecker in the service's `ConfigureServices` method in the `Startup` class:
 
 ```csharp
-services.AddHealthcheck(b => b.Add<ElasticsearchHealthchecker>());
+services.AddTransient<IHealthchecker, ElasticsearchHealthchecker>();
 ```
 
 ## How You Develop It

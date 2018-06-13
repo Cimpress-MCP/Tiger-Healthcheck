@@ -22,7 +22,7 @@ using static JetBrains.Annotations.ImplicitUseKindFlags;
 
 namespace Tiger.Healthcheck
 {
-    /// <content>Document filter for Swagger document generation.</content>
+    /// <summary>Document filter for Swagger document generation.</summary>
     public sealed partial class HealthcheckController
     {
         /// <summary>Provides a description of the healthcheck controller to Swagger.</summary>
@@ -35,7 +35,7 @@ namespace Tiger.Healthcheck
                 [NotNull] SwaggerDocument swaggerDoc,
                 DocumentFilterContext context)
             {
-                if (swaggerDoc.Tags == null) { swaggerDoc.Tags = new List<Tag>(); }
+                if (swaggerDoc.Tags is null) { swaggerDoc.Tags = new List<Tag>(); }
 
                 swaggerDoc.Tags.Add(new Tag
                 {
