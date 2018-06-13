@@ -1,4 +1,4 @@
-﻿### What's new in 5.0.0 (Released 2018-06-13)
+﻿### What's new in 5.0.1 (Released 2018-06-13)
 
 * Registration of healthcheckers has been simplified.
 

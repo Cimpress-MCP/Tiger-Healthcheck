@@ -1,4 +1,4 @@
-﻿// <copyright file="MvcCoreBuilderExtensions.cs" company="Cimpress, Inc.">
+﻿// <copyright file="MvcBuilderExtensions.cs" company="Cimpress, Inc.">
 //   Copyright 2017 Cimpress, Inc.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,20 +23,20 @@ using static System.Net.Http.HttpMethod;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    /// <summary>Extends the functionality of <see cref="IMvcCoreBuilder"/> for healthchecking.</summary>
+    /// <summary>Extends the functionality of <see cref="IMvcBuilder"/> for healthchecking.</summary>
     [PublicAPI]
-    public static class MvcCoreBuilderExtensions
+    public static class MvcBuilderExtensions
     {
-        /// <summary>Adds healthchecking services to the specified <see cref="IMvcCoreBuilder"/>.</summary>
+        /// <summary>Adds healthchecking services to the specified <see cref="IMvcBuilder"/>.</summary>
         /// <param name="builder">The <see cref="IMvcBuilder"/> to which to add services.</param>
         /// <returns>The modified application builder.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="builder"/> is <see langword="null"/>.</exception>
         [NotNull]
-        public static IMvcCoreBuilder AddHealthcheck([NotNull] this IMvcCoreBuilder builder)
+        public static IMvcBuilder AddHealthcheck([NotNull] this IMvcBuilder builder)
         {
             if (builder is null) { throw new ArgumentNullException(nameof(builder)); }
 
-            builder.AddCors(o => o.AddPolicy(
+            builder.Services.AddCors(o => o.AddPolicy(
                 "Healthcheck",
                 b => b.AllowAnyOrigin()
                       .WithMethods(Get.Method)
