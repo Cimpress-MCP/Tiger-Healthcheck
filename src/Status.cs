@@ -29,7 +29,7 @@ namespace Tiger.Healthcheck
     [SwaggerSchemaFilter(typeof(StatusSchemaFilter))]
     [JsonObject(
         NamingStrategyType = typeof(SnakeCaseNamingStrategy),
-        NamingStrategyParameters = new object[] { false, true, false })]
+        NamingStrategyParameters = new object[] { false, true, true })]
     sealed class Status
     {
         /// <summary>Initializes a new instance of the <see cref="Status"/> class.</summary>
@@ -44,7 +44,7 @@ namespace Tiger.Healthcheck
         {
             Extensions[nameof(message)] = message ?? throw new ArgumentNullException(nameof(message));
             GeneratedAt = generatedAt;
-            Duration = duration.TotalMilliseconds.ToString(CultureInfo.CurrentCulture);
+            Duration = duration.TotalMilliseconds.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>Gets the time at which this report was generated.</summary>
@@ -52,6 +52,7 @@ namespace Tiger.Healthcheck
 
         /// <summary>Gets the number of milliseconds it took to generate the report.</summary>
         [JsonProperty("DurationMillis")]
+        [NotNull]
         public string Duration { get; }
 
         /// <summary>Gets test results keyed by component.</summary>
@@ -61,5 +62,15 @@ namespace Tiger.Healthcheck
         /// <summary>Gets a mapping of JSON extension data.</summary>
         [JsonExtensionData, NotNull]
         public Dictionary<string, dynamic> Extensions { get; } = new Dictionary<string, dynamic>(Ordinal);
+
+        /// <summary>
+        /// Determines whether <see cref="Tests"/> should be included in
+        /// the JSON serialization of this instance.
+        /// </summary>
+        /// <returns>
+        /// <see langword="true"/> if <see cref="Tests"/> should be included;
+        /// otherwise, <see langword="false"/>.
+        /// </returns>
+        public bool ShouldSerializeTests() => Tests.Count != 0;
     }
 }

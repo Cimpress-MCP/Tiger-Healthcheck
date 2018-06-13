@@ -28,8 +28,8 @@ namespace Tiger.Healthcheck
         /// <inheritdoc/>
         void ISchemaFilter.Apply([NotNull] Schema model, [NotNull] SchemaFilterContext context)
         {
-            if (model == null) { throw new ArgumentNullException(nameof(model)); }
-            if (context == null) { throw new ArgumentNullException(nameof(context)); }
+            if (model is null) { throw new ArgumentNullException(nameof(model)); }
+            if (context is null) { throw new ArgumentNullException(nameof(context)); }
 
             model.Description = "Represents a status test.";
 

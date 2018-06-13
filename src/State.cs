@@ -23,10 +23,10 @@ namespace Tiger.Healthcheck
     [JsonConverter(typeof(StringEnumConverter), true)]
     public enum State
     {
-        /// <summary>The test failed</summary>
+        /// <summary>The test failed.</summary>
         Failed,
 
-        /// <summary>The test passed</summary>
+        /// <summary>The test passed.</summary>
         Passed
     }
 }

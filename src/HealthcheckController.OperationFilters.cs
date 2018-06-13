@@ -1,4 +1,4 @@
-// <copyright file="HealthcheckController.OperationFilters.cs" company="Cimpress, Inc.">
+﻿// <copyright file="HealthcheckController.OperationFilters.cs" company="Cimpress, Inc.">
 //   Copyright 2017 Cimpress, Inc.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Tiger.Healthcheck
 {
-    /// <content>Operation filters for Swagger document generation.</content>
+    /// <summary>Operation filters for Swagger document generation.</summary>
     public sealed partial class HealthcheckController
     {
         sealed class GetOperationFilter
@@ -30,7 +30,8 @@ namespace Tiger.Healthcheck
             /// <inheritdoc/>
             void IOperationFilter.Apply([NotNull] Operation operation, OperationFilterContext context)
             {
-                if (operation == null) { throw new ArgumentNullException(nameof(operation)); }
+                if (operation is null) { throw new ArgumentNullException(nameof(operation)); }
+                if (context is null) { throw new ArgumentNullException(nameof(context)); }
 
                 operation.Summary = "Reports system health.";
                 operation.Description = "Performs healthcheck of the service, possibly including subsystems.";

@@ -30,8 +30,8 @@ namespace Tiger.Healthcheck
         /// <inheritdoc/>
         void ISchemaFilter.Apply([NotNull] Schema model, [NotNull] SchemaFilterContext context)
         {
-            if (model == null) { throw new ArgumentNullException(nameof(model)); }
-            if (context == null) { throw new ArgumentNullException(nameof(context)); }
+            if (model is null) { throw new ArgumentNullException(nameof(model)); }
+            if (context is null) { throw new ArgumentNullException(nameof(context)); }
 
             model.Description = "Represents the status of a healthcheck operation.";
 
@@ -39,11 +39,11 @@ namespace Tiger.Healthcheck
             model.Properties["duration_millis"].Description = "The number of milliseconds it took to generate the report.";
             model.Properties["tests"].Description = "Test results keyed by component.";
 
-            // note(cosborn) Recreate the specification's example.
+            // note(cosborn) Recreate the specification's example, mostly.
             model.Example = new Status(
-                "Welcome bacʞ.",
-                DateTimeOffset.Parse("2015-06-25T14:33:33.383Z", InvariantCulture),
-                TimeSpan.FromMilliseconds(15.8))
+                message: "Welcome bacʞ.",
+                generatedAt: DateTimeOffset.Parse("2015-06-25T14:33:33.383Z", InvariantCulture),
+                duration: TimeSpan.FromMilliseconds(15.8))
             {
                 Tests =
                 {

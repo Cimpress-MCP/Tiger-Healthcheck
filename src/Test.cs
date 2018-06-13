@@ -63,7 +63,7 @@ namespace Tiger.Healthcheck
         public double Duration { get; }
 
         /// <summary>Gets the final state of this test.</summary>
-        public State Result => Error == null
+        public State Result => Error is null
             ? Passed
             : Failed;
 
@@ -72,6 +72,7 @@ namespace Tiger.Healthcheck
 
         /// <summary>Gets a description of any error conditions.</summary>
         [JsonProperty(DefaultValueHandling = Ignore)]
+        [CanBeNull]
         public string Error { get; }
 
         /// <summary>Creates a passed test.</summary>
