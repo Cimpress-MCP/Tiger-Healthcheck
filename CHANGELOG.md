@@ -1,4 +1,4 @@
-﻿### What's new in 6.0.0 (Released 2018-07-16)
+﻿### What's new in 6.0.1 (Released 2018-07-16)
 
 * Libary compatibility has been updated.
 

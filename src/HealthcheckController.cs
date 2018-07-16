@@ -61,6 +61,7 @@ namespace Tiger.Healthcheck
         /// <returns>Response indicating the health of the service.</returns>
         /// <remarks>Performs healthcheck of the service, possibly including subsystems.</remarks>
         [HttpGet]
+        [ProducesResponseType(typeof(Status), Status200OK)]
         [ProducesResponseType(typeof(Status), Status503ServiceUnavailable)]
         [SwaggerOperationFilter(typeof(GetOperationFilter))]
         [NotNull, ItemNotNull]
