@@ -24,7 +24,7 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 using Tiger.Clock;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 using static System.StringComparer;
@@ -34,7 +34,7 @@ namespace Tiger.Healthcheck
 {
     /// <summary>Manages the reporting of system health.</summary>
     [PublicAPI]
-    [Route("[controller]"), EnableCors("Healthcheck"), AllowAnonymous]
+    [Route("[controller]"), ApiController, EnableCors("Healthcheck"), AllowAnonymous]
     public sealed partial class HealthcheckController
         : ControllerBase
     {
@@ -61,11 +61,10 @@ namespace Tiger.Healthcheck
         /// <returns>Response indicating the health of the service.</returns>
         /// <remarks>Performs healthcheck of the service, possibly including subsystems.</remarks>
         [HttpGet]
-        [ProducesResponseType(typeof(Status), Status200OK)]
         [ProducesResponseType(typeof(Status), Status503ServiceUnavailable)]
         [SwaggerOperationFilter(typeof(GetOperationFilter))]
         [NotNull, ItemNotNull]
-        public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
+        public async Task<ActionResult<Status>> Get(CancellationToken cancellationToken = default)
         {
             var generationTime = _clock.Now;
             var statusTimer = Stopwatch.StartNew();
