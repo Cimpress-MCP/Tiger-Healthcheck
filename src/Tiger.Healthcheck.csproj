@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <Description>Automates the checking of service health.</Description>
-    <Copyright>©Cimpress 2017</Copyright>
+    <Copyright>©Cimpress 2018</Copyright>
     <AssemblyTitle>Tiger Healthcheck</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>5.0.1</VersionPrefix>
+    <VersionPrefix>6.0.0</VersionPrefix>
     <Authors>cosborn@cimpress.com</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
     <DefineConstants>$(DefineConstants);CODE_ANALYSIS</DefineConstants>
@@ -17,8 +17,8 @@
     <AssemblyName>Tiger.Healthcheck</AssemblyName>
     <PackageId>Tiger.Healthcheck</PackageId>
     <PackageTags>health;check;healthcheck;endpoint;mvc</PackageTags>
-    <PackageReleaseNotes><![CDATA[➟ Release 5.0.1
-⁃ Registration of healthcheckers has been simplified.
+    <PackageReleaseNotes><![CDATA[➟ Release 6.0.0
+⁃ Libary compatibility has been updated.
 ]]></PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/Cimpress-MCP/Tiger-Healthcheck</PackageProjectUrl>
     <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>  
@@ -44,9 +44,9 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Cors" Version="2.0.4" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="2.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Cors" Version="2.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="3.0.0" />
     <PackageReference Include="Tiger.Clock" Version="1.0.0" />
 
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Analyzers" Version="2.1.0" PrivateAssets="All" />
@@ -54,7 +54,7 @@
     <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.6.2-beta1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.NetCore.Analyzers" Version="2.6.2-beta1" PrivateAssets="All" />
     <PackageReference Include="Roslynator.Analyzers" Version="1.9.0" PrivateAssets="All" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta007" PrivateAssets="All" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" PrivateAssets="All" />
     <PackageReference Include="Text.Analyzers" Version="2.6.2-beta1" PrivateAssets="All" />
   </ItemGroup>
 
