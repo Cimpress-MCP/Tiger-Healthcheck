@@ -28,19 +28,19 @@ namespace Tiger.Healthcheck
         : ISchemaFilter
     {
         /// <inheritdoc/>
-        void ISchemaFilter.Apply([NotNull] Schema model, [NotNull] SchemaFilterContext context)
+        void ISchemaFilter.Apply([NotNull] Schema schema, [NotNull] SchemaFilterContext context)
         {
-            if (model is null) { throw new ArgumentNullException(nameof(model)); }
+            if (schema is null) { throw new ArgumentNullException(nameof(schema)); }
             if (context is null) { throw new ArgumentNullException(nameof(context)); }
 
-            model.Description = "Represents the status of a healthcheck operation.";
+            schema.Description = "Represents the status of a healthcheck operation.";
 
-            model.Properties["generated_at"].Description = "The time at which this report was generated.";
-            model.Properties["duration_millis"].Description = "The number of milliseconds it took to generate the report.";
-            model.Properties["tests"].Description = "Test results keyed by component.";
+            schema.Properties["generated_at"].Description = "The time at which this report was generated.";
+            schema.Properties["duration_millis"].Description = "The number of milliseconds it took to generate the report.";
+            schema.Properties["tests"].Description = "Test results keyed by component.";
 
             // note(cosborn) Recreate the specification's example, mostly.
-            model.Example = new Status(
+            schema.Example = new Status(
                 message: "Welcome bacʞ.",
                 generatedAt: DateTimeOffset.Parse("2015-06-25T14:33:33.383Z", InvariantCulture),
                 duration: TimeSpan.FromMilliseconds(15.8))

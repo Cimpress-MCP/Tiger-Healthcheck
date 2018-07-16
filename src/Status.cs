@@ -20,7 +20,7 @@ using System.Globalization;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 using static System.StringComparer;
 
 namespace Tiger.Healthcheck
@@ -30,7 +30,7 @@ namespace Tiger.Healthcheck
     [JsonObject(
         NamingStrategyType = typeof(SnakeCaseNamingStrategy),
         NamingStrategyParameters = new object[] { false, true, true })]
-    sealed class Status
+    public sealed class Status
     {
         /// <summary>Initializes a new instance of the <see cref="Status"/> class.</summary>
         /// <param name="message">A message describing the status.</param>

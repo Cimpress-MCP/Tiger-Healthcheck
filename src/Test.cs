@@ -18,7 +18,7 @@ using System;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Annotations;
 using static Newtonsoft.Json.DefaultValueHandling;
 using static Tiger.Healthcheck.State;
 
