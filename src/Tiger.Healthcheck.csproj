@@ -5,7 +5,7 @@
     <Copyright>©Cimpress 2018</Copyright>
     <AssemblyTitle>Tiger Healthcheck</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>6.0.1</VersionPrefix>
+    <VersionPrefix>6.0.2</VersionPrefix>
     <Authors>cosborn@cimpress.com</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
     <DefineConstants>$(DefineConstants);CODE_ANALYSIS</DefineConstants>
