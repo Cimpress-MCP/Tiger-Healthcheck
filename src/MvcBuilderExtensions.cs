@@ -44,6 +44,7 @@ namespace Microsoft.Extensions.DependencyInjection
                       .SetPreflightMaxAge(TimeSpan.FromDays(1))));
             builder.Services.TryAddScoped<IClock, StandardClock>();
             builder.Services.AddSwaggerGen(o => o.DocumentFilter<HealthcheckController.DocumentFilter>());
+            builder.AddApplicationPart(typeof(HealthcheckController).Assembly);
 
             return builder;
         }

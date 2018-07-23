@@ -1,4 +1,8 @@
-﻿### What's new in 6.0.1 (Released 2018-07-16)
+﻿### What's new in 6.0.2 (Released 2018-07-23)
+
+* The healthcheck controller has been added as an application part.
+
+### What's new in 6.0.1 (Released 2018-07-16)
 
 * Libary compatibility has been updated.
 
