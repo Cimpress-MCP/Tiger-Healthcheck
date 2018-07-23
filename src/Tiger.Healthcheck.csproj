@@ -17,7 +17,10 @@
     <AssemblyName>Tiger.Healthcheck</AssemblyName>
     <PackageId>Tiger.Healthcheck</PackageId>
     <PackageTags>health;check;healthcheck;endpoint;mvc</PackageTags>
-    <PackageReleaseNotes><![CDATA[➟ Release 6.0.1
+    <PackageReleaseNotes><![CDATA[➟ Release 6.0.2
+⁃ The healthcheck controller has been added as an application part.
+
+➟ Release 6.0.1
 ⁃ Libary compatibility has been updated.
 ]]></PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/Cimpress-MCP/Tiger-Healthcheck</PackageProjectUrl>
