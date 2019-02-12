@@ -1,4 +1,4 @@
-﻿// <copyright file="MvcBuilderExtensions.cs" company="Cimpress, Inc.">
+﻿// <copyright file="TigerHealthcheckMvcBuilderExtensions.cs" company="Cimpress, Inc.">
 //   Copyright 2017 Cimpress, Inc.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>Extends the functionality of <see cref="IMvcBuilder"/> for healthchecking.</summary>
     [PublicAPI]
-    public static class MvcBuilderExtensions
+    public static class TigerHealthcheckMvcBuilderExtensions
     {
         /// <summary>Adds healthchecking services to the specified <see cref="IMvcBuilder"/>.</summary>
         /// <param name="builder">The <see cref="IMvcBuilder"/> to which to add services.</param>

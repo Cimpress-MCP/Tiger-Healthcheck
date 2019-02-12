@@ -1,4 +1,8 @@
-﻿### What's new in 6.0.2 (Released 2018-07-23)
+﻿### What's new in 6.0.3 (Released 2018-02-14)
+
+* The library's documentation generation, via Swashbuckle, has been upgraded.
+
+### What's new in 6.0.2 (Released 2018-07-23)
 
 * The healthcheck controller has been added as an application part.
 
