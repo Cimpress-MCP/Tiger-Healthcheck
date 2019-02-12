@@ -2,7 +2,7 @@ image: microsoft/dotnet:2.1-sdk-alpine
 
 stages:
   - build
-  - test-pack
+  - pack
   - deploy
 
 cache:
@@ -15,13 +15,8 @@ build:
   artifacts:
     untracked: true
 
-test:
-  stage: test-pack
-  script:
-    - dotnet test -c Release ./unit/Test.csproj
-
 pack:
-  stage: test-pack
+  stage: pack
   script:
     - dotnet pack -c Release -o "$(pwd)/dist/"
   artifacts:
