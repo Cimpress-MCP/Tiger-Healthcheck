@@ -26,8 +26,8 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Tiger.Clock;
-using static Microsoft.AspNetCore.Http.StatusCodes;
 using static System.StringComparer;
+using static Microsoft.AspNetCore.Http.StatusCodes;
 using static Tiger.Healthcheck.State;
 
 namespace Tiger.Healthcheck
@@ -81,9 +81,12 @@ namespace Tiger.Healthcheck
                 Tests = { healths.ToDictionary(h => h.Name, h => h.Test, Ordinal) }
             };
 
-            return status.Tests.Values.Any(t => t.Result == Failed)
-                ? StatusCode(Status503ServiceUnavailable, status)
-                : Ok(status);
+            if (status.Tests.Values.Any(t => t.Result == Failed))
+            {
+                return StatusCode(Status503ServiceUnavailable, status);
+            }
+
+            return status;
         }
     }
 }
